@@ -18,6 +18,7 @@ export default class Piece extends cc.Component {
         for (let i = 0; i < points.length; i++) {
             ctx.lineTo(points[i].x, points[i].y);
         }
+        ctx.fill();
         ctx.stroke();
     }
 

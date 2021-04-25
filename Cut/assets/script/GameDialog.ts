@@ -1,15 +1,15 @@
-import { Button, Label } from '../../creator';
-import { Main } from './cut-main';
+import { Constants } from "./Constants";
+import { Sprite } from "../../creator";
 const { ccclass, property } = cc._decorator;
 
 @ccclass
 export default class GameDialog extends cc.Component {
   @property(cc.Node)
   canvas: cc.Node = null;
-  
+
   @property(cc.Node)
   score: cc.Node = null;
-  
+
   @property(cc.Node)
   tip: cc.Node = null;
 
@@ -25,6 +25,14 @@ export default class GameDialog extends cc.Component {
   @property(cc.Node)
   quitBtn: cc.Node = null;
 
+  @property(cc.SpriteFrame)
+  nextLevelSF: cc.SpriteFrame = null;
+
+  @property(cc.SpriteFrame)
+  restartSF: cc.SpriteFrame = null;
+
+  isComplete: boolean = false;
+
   onLoad() {}
 
   start() {}
@@ -34,19 +42,23 @@ export default class GameDialog extends cc.Component {
   }
 
   onNextLevelBtnClick() {
-    this.dismissDialog();
-    this.canvas.getComponent("cut-main").initWood();
-    // cc.director.loadScene("cut"); //场景跳转
+    if (this.isComplete) {
+      this.dismissDialog();
+      this.canvas.getComponent("cut-main").initWood();
+    } else {
+      cc.director.loadScene("Game"); //场景跳转
+    }
   }
 
   showDialog(score) {
-    let isComplete =score>=95;
-    if(isComplete){
-      this.tip.getComponent(cc.Label).string="恭喜过关！";
-      this.nextLevelBtn.active = true;
-    }else{
-      this.tip.getComponent(cc.Label).string="两个形状相似度未达到95分，游戏结束";
-      this.nextLevelBtn.active = false;
+    this.isComplete = score >= Constants.COMPLETE_SCORE;
+    if (this.isComplete) {
+      this.tip.getComponent(cc.Label).string = "恭喜过关！";
+      this.nextLevelBtn.getComponent(cc.Sprite).spriteFrame = this.nextLevelSF;
+    } else {
+      this.tip.getComponent(cc.Label).string =
+        "两个形状相似度未达到过关分，游戏结束";
+      this.nextLevelBtn.getComponent(cc.Sprite).spriteFrame = this.restartSF;
     }
 
     this.node.active = true;
@@ -55,7 +67,7 @@ export default class GameDialog extends cc.Component {
     var fin = cc.fadeTo(0.3, 127);
     this.background.runAction(fin);
     // dlg由小到大
-    this.score.getComponent(cc.Label).string=score;
+    this.score.getComponent(cc.Label).string = score;
     this.score.scale = 0;
     var s = cc.scaleTo(0.4, 1).easing(cc.easeBackOut());
     this.score.runAction(s);

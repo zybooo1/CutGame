@@ -1572,6 +1572,12 @@
     "quitBtn": {
       "__id__": 29
     },
+    "nextLevelSF": {
+      "__uuid__": "1826f28f-d5bb-4e3d-b99c-2376b5d00feb"
+    },
+    "restartSF": {
+      "__uuid__": "f7a9c433-97fa-4ba0-a66d-3dcdcf991d95"
+    },
     "_id": "a071GcCD5Pr6aJ7rxXyGGE"
   },
   {
