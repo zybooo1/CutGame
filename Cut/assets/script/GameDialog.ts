@@ -44,7 +44,7 @@ export default class GameDialog extends cc.Component {
   onNextLevelBtnClick() {
     if (this.isComplete) {
       this.dismissDialog();
-      this.canvas.getComponent("cut-main").initWood();
+      this.canvas.getComponent("GameMain").initShape();
     } else {
       cc.director.loadScene("Game"); //场景跳转
     }

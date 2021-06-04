@@ -23,7 +23,7 @@
   "fb-instant-games": {},
   "android": {
     "REMOTE_SERVER_ROOT": "",
-    "packageName": "org.cocos2d.demo"
+    "packageName": "com.zybooo1.cutgame"
   },
   "ios": {
     "REMOTE_SERVER_ROOT": "",

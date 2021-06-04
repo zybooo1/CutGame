@@ -1,7 +1,7 @@
 const {ccclass, property} = cc._decorator;
 
 @ccclass
-export default class Wood extends cc.Component {
+export default class Shape extends cc.Component {
 
     onLoad () {
         this.draw();
@@ -18,13 +18,14 @@ export default class Wood extends cc.Component {
         let vectors =[];
 
         //随机形状
-        const dig = 2 * Math.PI / dotCount;
+        const dig = 2 * Math.PI / dotCount;//周长2πr 一周的弧度数为2πr/r=2π，
         for (let i = 0; i < dotCount; i++)
         {
             const side = Math.random()*300+ 50;
 
-            const x = side * Math.cos(i * dig);
-            const y = side * Math.sin(i * dig);
+            //顶点
+            const x = side * Math.cos(i * dig);//cos=x/side
+            const y = side * Math.sin(i * dig);//sin=y/side
             points.push({x:Math.round(x),y:Math.round(y)});
 
             let v = cc.v2(Math.round(x), Math.round(y));
@@ -33,8 +34,10 @@ export default class Wood extends cc.Component {
         cc.warn(points);
         cc.warn(vectors);
 
+        //添加碰撞盒
         this.getComponent(cc.PhysicsPolygonCollider).points=vectors;
 
+        //绘制
         const ctx = this.getComponent(cc.Graphics);
         ctx.clear();
         const len = points.length;

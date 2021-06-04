@@ -7,7 +7,7 @@ export default class Main extends cc.Component {
   dialog: cc.Node = undefined;
 
   @property(cc.Prefab)
-  wood: cc.Prefab = undefined;
+  shape: cc.Prefab = undefined;
 
   @property(cc.Prefab)
   piece: cc.Prefab = undefined;
@@ -25,17 +25,17 @@ export default class Main extends cc.Component {
   canDraw: boolean = true;
 
   onLoad() {
-    this.initWood();
+    this.initShape();
     this.registerEvent();
   }
 
-  initWood() {
+  initShape() {
     this.level++;
     this.levelText.string = "Level " + this.level;
 
     this.gameLayer.removeAllChildren();
-    var wood = cc.instantiate(this.wood);
-    this.gameLayer.addChild(wood);
+    var shape = cc.instantiate(this.shape);
+    this.gameLayer.addChild(shape);
 
     this.canDraw = true;
   }
